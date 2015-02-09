@@ -1,33 +1,29 @@
 /* Prologue. */
 %option noyywrap
-%option c++
 
 %{
 #include "parsecalc.hpp"
+#include "location.hh"
 
 # define YY_USER_ACTION                         \
-  yylloc->last_column += yyleng;
+  yylloc->columns(yyleng);
 
-# define STEP()                                 \
-  do {                                          \
-    yylloc->first_line = yylloc->last_line;     \
-    yylloc->first_column = yylloc->last_column; \
-  } while (0)
 
 %}
 %%
 %{
-  STEP();
+  yylloc->step();
 %}
-"+"         return PLUS;
-"-"         return MINUS;
-"*"         return STAR;
-"/"         return SLASH;
-"("         return LPAREN;
-")"         return RPAREN;
-[0-9]+      yylval->ival = strtol(yytext, 0, 10) ;return INT;
-" "+        STEP(); continue;
-"\n"        yylloc->last_line += 1; yylloc->last_column = 1; STEP(); return EOL;
+"+"         return yy::parser::token::TOK_PLUS;
+"-"         return yy::parser::token::TOK_MINUS;
+"*"         return yy::parser::token::TOK_STAR;
+"/"         return yy::parser::token::TOK_SLASH;
+"("         return yy::parser::token::TOK_LPAREN;
+")"         return yy::parser::token::TOK_RPAREN;
+[0-9]+      yylval->build<int>(strtol(yytext, 0, 10)) ; return yy::parser::token::TOK_INT;
+" "+        yylloc->step(); continue;
+"\n"        yylloc->lines(1); yylloc->columns(1); yylloc->step(); return yy::parser::token::TOK_EOL;
 .           fprintf (stderr, "error: invalid character: %c\n", *yytext);
+<<EOF>>		return yy::parser::token::TOK_EOF;
 %%
 /* Epilogue.  */
