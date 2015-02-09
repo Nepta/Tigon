@@ -2,3 +2,4 @@
 *.hpp
 calc
 *.o
+*.hh
