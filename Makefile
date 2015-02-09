@@ -2,7 +2,7 @@ BISON = bison
 BISONFLAGS =
 FLEX = flex
 FLEXFLAGS =
-
+CFLAGS=-Wall -Wextra
 all: calc
 
 calc: parsecalc.o scancalc.o
