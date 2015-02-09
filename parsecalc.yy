@@ -4,6 +4,7 @@
 %define api.pure full
 %locations
 %parse-param { unsigned* nerrs }
+%language "c++"
 %union
 {
   int ival;

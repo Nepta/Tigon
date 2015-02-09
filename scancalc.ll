@@ -1,5 +1,6 @@
 /* Prologue. */
 %option noyywrap
+
 %{
 #include "parsecalc.hpp"
 
