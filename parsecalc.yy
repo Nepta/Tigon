@@ -2,13 +2,11 @@
 %error-verbose
 %debug
 %language "c++"
+%define api.token.prefix {TOK_}
+%define api.value.type variant
 
 %locations
 %parse-param { unsigned& nerrs }
-%union
-{
-  int ival;
-}
 
 %code provides
 {
@@ -21,10 +19,10 @@
 %left "+" "-"
 %left "*" "/"
 
-%token <ival> INT "number"
-%type <ival> exp line
+%token <int> INT "number"
+%type <int> exp line
 
-%printer { yyo << $$; } <ival>
+%printer { yyo << $$; } <int>
 
 %token
   LPAREN "("
@@ -34,10 +32,11 @@
   SLASH "/"
   STAR  "*"
   EOL "end of line"
+  EOF 0
 %%
 input:
   %empty
-| input line  { std::cout << $2; }
+| input line  { std::cout << $2 << std::endl; }
 ;
 
 line:
