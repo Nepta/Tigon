@@ -36,8 +36,8 @@ check: calc
 .PRECIOUS: %.cpp
 
 CLEANFILES = \
-  *~ *.o calc \
-  parsecalc.cpp parsecalc.h parsecalc.output \
+  *~ *.o calc *.hh\
+  parsecalc.cpp parsecalc.hpp parsecalc.output \
   scancalc.cpp
 
 .PHONY: clean
