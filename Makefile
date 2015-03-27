@@ -1,5 +1,5 @@
 BISON = bison
-BISONFLAGS =
+BISONFLAGS = -Wall
 FLEX = flex
 FLEXFLAGS =
 CFLAGS=-Wall -Wextra
@@ -43,3 +43,4 @@ CLEANFILES = \
 .PHONY: clean
 clean:
 	rm -f $(CLEANFILES)
+
