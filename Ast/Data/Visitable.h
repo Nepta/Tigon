@@ -5,7 +5,7 @@
 
 class Visitable{
 public:
-	virtual Expression* accept(Visiteur& v){
+	virtual Visitable* accept(Visiteur& v){
 		return v.visite(*this);
 	}
 	

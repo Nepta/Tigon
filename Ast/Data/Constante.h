@@ -1,14 +1,16 @@
 #ifndef __Constante_H__
 #define __Constante_H__
 
-#include "Expression.h"
+#include "Visitable.h"
 
-class Constante : public Expression{
+class Constante : public Visitable{
 	int value_;
 
 public:
 	Constante(int value) : value_(value){}
-	
+	int value(){
+		return value_;
+	}
 };
 
 #endif /* __Constante_H__ */

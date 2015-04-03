@@ -1,11 +1,10 @@
 #ifndef __Subtraction_H__
 #define __Subtraction_H__
 
-#include "../Visitable.h"
+#include "Operator.h"
 
-class Subtraction : public Visitable{
+class Subtraction : public Operator{
 public:
-	Subtraction();
 };
 
 #endif /* __Subtraction_H__ */

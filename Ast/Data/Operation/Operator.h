@@ -1,9 +1,9 @@
 #ifndef __Operator_H__
 #define __Operator_H__
 
-#include "../Expression.h"
+#include "../Visitable.h"
 
-class Operator : public Expression{
+class Operator : public Visitable{
 	Expression *left_;
 	Expression *right_;
 

@@ -8,19 +8,19 @@ class PrettyPrinter : public Visiteur{
 	std::ostream ostr;
 	
 public:
-	Expression* visite(Addition& operation){
+	Visitable* visite(Addition& operation){
 		return operation.left().accept(*this) + " + " + operation.right().accept(*this);
 	}
 
-	Expression* visite(Division& operation){
+	Visitable* visite(Division& operation){
 		return operation.left().accept(*this) + " ÷ " + operation.right().accept(*this);
 	}
 
-	Expression* visite(Multiplication& operation){
+	Visitable* visite(Multiplication& operation){
 		return operation.left().accept(*this) + " × " + operation.right().accept(*this);
 	}
 
-	Expression* visite(Subtraction& operation){
+	Visitable* visite(Subtraction& operation){
 		return operation.left().accept(*this) + " - " + operation.right().accept(*this);
 	}
 	
