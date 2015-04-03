@@ -15,6 +15,15 @@
   YY_DECL;
 }
 
+%code requires
+{
+#include "Ast/Data/Operation/Addition.h"
+#include "Ast/Data/Operation/Subtraction.h"
+#include "Ast/Data/Operation/Multiplication.h"
+#include "Ast/Data/Operation/Division.h"
+#include "Ast/Control/PrettyPrinter.h"
+}
+
 %expect 0
 %left "+" "-"
 %left "*" "/"
@@ -36,7 +45,7 @@
 %%
 input:
   %empty
-| input line  { std::cout << $2 << std::endl; }
+| input line  { std::cout << (new PrettyPrinter())->visite($2) << std::endl; }
 ;
 
 line:
@@ -46,17 +55,17 @@ line:
 ;
 
 exp:
-  exp "+" exp  { $$ = $1 + $3; }
-| exp "-" exp  { $$ = $1 - $3; }
-| exp "*" exp  { $$ = $1 * $3; }
+  exp "+" exp  { $$ = new Addition($1,$3); }
+| exp "-" exp  { $$ = new Subtraction($1,$3); }
+| exp "*" exp  { $$ = new Multiplication($1,$3); }
 | exp "/" exp  {
-                 if ($3)
-                   $$ = $1 / $3;
-                 else
-                   {
-                     yy::parser::error(@3, "division by 0");
-                     YYERROR;
-                   }
+//                 if ($3)
+                   $$ = new Division($1,$3);
+//                 else
+//                   {
+//                     yy::parser::error(@3, "division by 0");
+//                     yyerror;
+//                   }
                }
 | "(" exp ")"  { $$ = $2; }
 | "(" error ")"{ $$ = 777; }

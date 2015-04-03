@@ -2,9 +2,8 @@
 #define __Expression_H__
 
 
-class Expression{
+class Expression : public Visitable{
 public:
-	Expression();
 };
 
 #endif /* __Expression_H__ */

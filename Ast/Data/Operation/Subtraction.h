@@ -1,8 +1,9 @@
 #ifndef __Subtraction_H__
 #define __Subtraction_H__
 
+#include "../Visitable.h"
 
-class Subtraction{
+class Subtraction : public Visitable{
 public:
 	Subtraction();
 };
