@@ -5,7 +5,7 @@
 
 class Multiplication : public Operator{
 public:
-	Multiplication(Expression *left, Expression *right) : LeftRightOperation(left,right) {}
+	Multiplication(Visitable *left, Visitable *right) : Operator(left,right) {}
 };
 
 #endif /* __Multiplication_H__ */

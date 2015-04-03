@@ -5,7 +5,7 @@
 
 class Addition : public Operator{
 public:
-	Addition(Expression *left, Expression *right) : LeftRightOperation(left,right) {}
+	Addition(Visitable *left, Visitable *right) : Operator(left,right) {}
 };
 
 #endif /* __Addition_H__ */

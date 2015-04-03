@@ -4,17 +4,17 @@
 #include "../Visitable.h"
 
 class Operator : public Visitable{
-	Expression *left_;
-	Expression *right_;
+	Visitable *left_;
+	Visitable *right_;
 
 public:
-	Operator(Expression *left, Expression *right) : left_(left), right_(right){}
+	Operator(Visitable *left, Visitable *right) : left_(left), right_(right){}
 	
-	virtual Expression* left(){
+	virtual Visitable* left(){
 		return left_;
 	}
 	
-	virtual Expression* right(){
+	virtual Visitable* right(){
 		return right_;
 	}
 };

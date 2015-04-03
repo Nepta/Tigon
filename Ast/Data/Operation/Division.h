@@ -5,7 +5,7 @@
 
 class Division : public Operator{
 public:
-	Division(Expression *left, Expression *right) : LeftRightOperation(left,right) {}
+	Division(Visitable *left, Visitable *right) : Operator(left,right) {}
 };
 
 #endif /* __Division_H__ */

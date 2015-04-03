@@ -5,6 +5,7 @@
 
 class Subtraction : public Operator{
 public:
+	Subtraction(Visitable *left, Visitable *right) : Operator(left,right) {}
 };
 
 #endif /* __Subtraction_H__ */
