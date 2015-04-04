@@ -8,7 +8,7 @@ public:
 	Subtraction(Visitable *left, Visitable *right) : Operator(left,right) {}
 
 	void accept(Visiteur& v){
-		return v.visite(*this);
+		v.visite(*this);
 	}
 };
 
