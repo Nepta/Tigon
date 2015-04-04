@@ -2,6 +2,7 @@
 #define __Interpreter_H__
 
 #include "../Data/Constante.h"
+#include "../Data/Block/If.h"
 #include "DivisionByZeroException.h"
 #include <iostream>
 
@@ -59,6 +60,15 @@ public:
 	void visite(Constante& c){
 		push(c.value());
 	}
+	
+	void visite(If& i){
+		i.condition()->accept(*this);
+		int condition = pullVar();
+		if(condition != 0){
+			i.expression()->accept(*this);
+		}
+	}
+		
 	friend
 	std::ostream& operator<<(std::ostream& ostr, Interpreter& i);
 };

@@ -34,12 +34,15 @@
 %printer { yyo << $$; } <int>
 
 %token
-  LPAREN "("
-  MINUS "-"
-  PLUS "+"
-  RPAREN ")"
-  SLASH "/"
-  STAR  "*"
+  LPAREN	"("
+  MINUS	"-"
+  PLUS	"+"
+  RPAREN	")"
+  SLASH	"/"
+  STAR	"*"
+  IF		"if"
+  THEN	"then"
+  END		"end"
   EOL "end of line"
   EOF 0
 %%
@@ -55,13 +58,14 @@ line:
 ;
 
 exp:
-  exp "+" exp  { $$ = new Addition($1,$3); }
-| exp "-" exp  { $$ = new Subtraction($1,$3); }
-| exp "*" exp  { $$ = new Multiplication($1,$3); }
-| exp "/" exp  { $$ = new Division($1,$3); }
-| "(" exp ")"  { $$ = $2; }
-| "(" error ")"{ $$ = new Constante(777); }
-| INT          { $$ = new Constante($1); }
+  exp "+" exp				{ $$ = new Addition($1,$3); }
+| exp "-" exp				{ $$ = new Subtraction($1,$3); }
+| exp "*" exp				{ $$ = new Multiplication($1,$3); }
+| exp "/" exp				{ $$ = new Division($1,$3); }
+| "(" exp ")"				{ $$ = $2; }
+| IF exp THEN exp END	{ $$ = new If($2,$4); }
+| "(" error ")"			{ $$ = new Constante(777); }
+| INT							{ $$ = new Constante($1); }
 ;
 
 %%

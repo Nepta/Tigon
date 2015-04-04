@@ -8,6 +8,7 @@ class Division;
 class Multiplication;
 class Subtraction;
 class Constante;
+class If;
 
 class Visiteur{
 public:
@@ -16,6 +17,7 @@ public:
 	virtual void visite(Multiplication& operation) = 0;
 	virtual void visite(Subtraction& operation) = 0;
 	virtual void visite(Constante& c) = 0;
+	virtual void visite(If& i) = 0;
 };
 
 #endif /* __Visiteur_H__ */
