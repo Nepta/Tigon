@@ -21,7 +21,7 @@
 #include "Ast/Data/Operation/Subtraction.h"
 #include "Ast/Data/Operation/Multiplication.h"
 #include "Ast/Data/Operation/Division.h"
-#include "Ast/Control/PrettyPrinter.h"
+#include "Ast/Control/Interpreter.h"
 }
 
 %expect 0
@@ -45,7 +45,7 @@
 %%
 input:
   %empty
-| input line  { std::cout << *(new PrettyPrinter(*($2))) << std::endl; }
+| input line  { std::cout << *(new Interpreter(*($2))) << std::endl; }
 ;
 
 line:
