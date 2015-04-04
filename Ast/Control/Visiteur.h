@@ -1,13 +1,21 @@
 #ifndef __Visiteur_H__
 #define __Visiteur_H__
 
-class Visitable;
-#include "../Data/Constante.h"
+#include <string>
+
+class Addition;
+class Division;
+class Multiplication;
+class Subtraction;
+class Constante;
 
 class Visiteur{
 public:
-	virtual Visitable* visite(Visitable&) = 0;
-	virtual int visite(Constante&) = 0;
+	virtual std::string visite(Addition& operation) = 0;
+	virtual std::string visite(Division& operation) = 0;
+	virtual std::string visite(Multiplication& operation) = 0;
+	virtual std::string visite(Subtraction& operation) = 0;
+	virtual std::string visite(Constante& c) = 0;
 };
 
 #endif /* __Visiteur_H__ */

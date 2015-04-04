@@ -8,8 +8,13 @@ class Constante : public Visitable{
 
 public:
 	Constante(int value) : value_(value){}
+	
 	int value(){
 		return value_;
+	}
+	
+	std::string accept(Visiteur& v){
+		return v.visite(*this);
 	}
 };
 

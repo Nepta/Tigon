@@ -3,7 +3,7 @@
 
 #include "../Visitable.h"
 
-class Operator : public Visitable{
+class Operator{
 	Visitable *left_;
 	Visitable *right_;
 

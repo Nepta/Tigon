@@ -3,9 +3,13 @@
 
 #include "Operator.h"
 
-class Multiplication : public Operator{
+class Multiplication : public Operator, public Visitable{
 public:
 	Multiplication(Visitable *left, Visitable *right) : Operator(left,right) {}
+	
+	std::string accept(Visiteur& v){
+		return v.visite(*this);
+	}
 };
 
 #endif /* __Multiplication_H__ */

@@ -45,31 +45,23 @@
 %%
 input:
   %empty
-| input line  { std::cout << (new PrettyPrinter())->visite($2) << std::endl; }
+| input line  { std::cout << $2 << std::endl; }
 ;
 
 line:
-  EOL       { $$ = -1; }
+  EOL       { $$ = new Constante(-1); }
 | exp EOL   { $$ = $1; }
-| error EOL { $$ = 666; yyerrok; }
+| error EOL { $$ = new Constante(666); yyerrok; }
 ;
 
 exp:
   exp "+" exp  { $$ = new Addition($1,$3); }
 | exp "-" exp  { $$ = new Subtraction($1,$3); }
 | exp "*" exp  { $$ = new Multiplication($1,$3); }
-| exp "/" exp  {
-//                 if ($3)
-                   $$ = new Division($1,$3);
-//                 else
-//                   {
-//                     yy::parser::error(@3, "division by 0");
-//                     yyerror;
-//                   }
-               }
+| exp "/" exp  { $$ = new Division($1,$3); }
 | "(" exp ")"  { $$ = $2; }
-| "(" error ")"{ $$ = 777; }
-| INT          { $$ = $1; }
+| "(" error ")"{ $$ = new Constante(777); }
+| INT          { $$ = new Constante($1); }
 ;
 
 %%
