@@ -29,7 +29,7 @@
 %left "*" "/"
 
 %token <int> INT "number"
-%type <int> exp line
+%type <Visitable*> exp line
 
 %printer { yyo << $$; } <int>
 
@@ -45,7 +45,7 @@
 %%
 input:
   %empty
-| input line  { std::cout << $2 << std::endl; }
+| input line  { std::cout << (new PrettyPrinter($2))->toString() << std::endl; }
 ;
 
 line:

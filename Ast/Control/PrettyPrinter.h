@@ -7,8 +7,10 @@
 #include "../Data/Constante.h"
 
 class PrettyPrinter : public Visiteur{
-	
+	Visitable* ast_;
 public:
+	PrettyPrinter(Visitable* v) : ast_(v){}
+
 	std::string visite(Addition& operation){
 		return operation.left()->accept(*this) + " + " + operation.right()->accept(*this);
 	}
@@ -27,6 +29,10 @@ public:
 	
 	std::string visite(Constante& c){
 		return std::to_string(c.value());
+	}
+
+	std::string toString(){
+		return ast_->accept(*this);
 	}
 };
 
