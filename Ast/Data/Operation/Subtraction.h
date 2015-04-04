@@ -7,7 +7,7 @@ class Subtraction : public Operator, public Visitable{
 public:
 	Subtraction(Visitable *left, Visitable *right) : Operator(left,right) {}
 
-	std::string accept(Visiteur& v){
+	void accept(Visiteur& v){
 		return v.visite(*this);
 	}
 };

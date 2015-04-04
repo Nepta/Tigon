@@ -6,7 +6,7 @@
 
 class Visitable{
 public:
-	virtual std::string accept(Visiteur& v) = 0;
+	virtual void accept(Visiteur& v) = 0;
 };
 #endif /* __Visitable_H__ */
 

@@ -7,7 +7,7 @@ class Addition : public Operator, public Visitable{
 public:
 	Addition(Visitable *left, Visitable *right) : Operator(left,right) {}
 	
-	std::string accept(Visiteur& v){
+	void accept(Visiteur& v){
 		return v.visite(*this);
 	}
 };

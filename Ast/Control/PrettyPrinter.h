@@ -2,37 +2,48 @@
 #define __PrettyPrinter_H__
 
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #include "../Data/Constante.h"
 
 class PrettyPrinter : public Visiteur{
 	Visitable* ast_;
+	std::ostringstream s;
 public:
 	PrettyPrinter(Visitable* v) : ast_(v){}
 
-	std::string visite(Addition& operation){
-		return operation.left()->accept(*this) + " + " + operation.right()->accept(*this);
+	void visite(Addition& operation){
+		operation.left()->accept(*this);
+		s << " + ";
+		operation.right()->accept(*this);
 	}
 
-	std::string visite(Division& operation){
-		return operation.left()->accept(*this) + " ÷ " + operation.right()->accept(*this);
+	void visite(Division& operation){
+		operation.left()->accept(*this);
+		s << " ÷ ";
+		operation.right()->accept(*this);
 	}
 
-	std::string visite(Multiplication& operation){
-		return operation.left()->accept(*this) + " × " + operation.right()->accept(*this);
+	void visite(Multiplication& operation){
+		operation.left()->accept(*this);
+		s << " × ";
+		operation.right()->accept(*this);
 	}
 
-	std::string visite(Subtraction& operation){
-		return operation.left()->accept(*this) + " - " + operation.right()->accept(*this);
+	void visite(Subtraction& operation){
+		operation.left()->accept(*this);
+		s << " - ";
+		operation.right()->accept(*this);
 	}
 	
-	std::string visite(Constante& c){
-		return std::to_string(c.value());
+	void visite(Constante& c){
+		s << std::to_string(c.value());
 	}
 
 	std::string toString(){
-		return ast_->accept(*this);
+		ast_->accept(*this);
+		return s.str();
 	}
 };
 

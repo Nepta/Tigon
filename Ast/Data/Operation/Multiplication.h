@@ -7,7 +7,7 @@ class Multiplication : public Operator, public Visitable{
 public:
 	Multiplication(Visitable *left, Visitable *right) : Operator(left,right) {}
 	
-	std::string accept(Visiteur& v){
+	void accept(Visiteur& v){
 		return v.visite(*this);
 	}
 };

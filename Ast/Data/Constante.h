@@ -13,7 +13,7 @@ public:
 		return value_;
 	}
 	
-	std::string accept(Visiteur& v){
+	void accept(Visiteur& v){
 		return v.visite(*this);
 	}
 };
