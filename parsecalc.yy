@@ -45,7 +45,7 @@
 %%
 input:
   %empty
-| input line  { std::cout << (new PrettyPrinter($2))->toString() << std::endl; }
+| input line  { std::cout << *(new PrettyPrinter(*($2))) << std::endl; }
 ;
 
 line:

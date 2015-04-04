@@ -8,44 +8,49 @@
 #include "../Data/Constante.h"
 
 class PrettyPrinter : public Visiteur{
-	Visitable* ast_;
-	std::ostringstream s;
+	Visitable& ast_;
+	std::stringstream s_;
 public:
-	PrettyPrinter(Visitable* v) : ast_(v){}
+	PrettyPrinter(Visitable& v) : ast_(v){}
 
 	void visite(Addition& operation){
 		operation.left()->accept(*this);
-		s << " + ";
+		s_ << " + ";
 		operation.right()->accept(*this);
 	}
 
 	void visite(Division& operation){
 		operation.left()->accept(*this);
-		s << " ÷ ";
+		s_ << " ÷ ";
 		operation.right()->accept(*this);
 	}
 
 	void visite(Multiplication& operation){
 		operation.left()->accept(*this);
-		s << " × ";
+		s_ << " × ";
 		operation.right()->accept(*this);
 	}
 
 	void visite(Subtraction& operation){
 		operation.left()->accept(*this);
-		s << " - ";
+		s_ << " - ";
 		operation.right()->accept(*this);
 	}
 	
 	void visite(Constante& c){
-		s << std::to_string(c.value());
+		s_ << std::to_string(c.value());
 	}
 
-	std::string toString(){
-		ast_->accept(*this);
-		return s.str();
-	}
+	friend
+	std::ostream& operator<<(std::ostream& ostr, PrettyPrinter& v);	
 };
 
+inline
+std::ostream& operator<<(std::ostream& ostr, PrettyPrinter& v){
+	v.s_.str(std::string());
+	v.ast_.accept(v);
+	ostr << v.s_.str();
+	return ostr;
+}
 #endif /* __PrettyPrinter_H__ */
 

@@ -2,13 +2,13 @@ BISON = bison
 BISONFLAGS = -Wall
 FLEX = flex
 FLEXFLAGS =
-CFLAGS=-Wall -Wextra -std=c++11
+CFLAGS=-Wall -Wextra -std=c++11 -Wno-deprecated-register
 all: calc
 
 calc: parsecalc.o scancalc.o
 	$(CXX) $^ -o $@
 
-scancalc.o: parsecalc.hpp
+scancalc.o: parsecalc.hpp $(wildcard Ast/Data/*.h Ast/Data/Operation/*.h Ast/Control/*.h)
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -c $< -o $@
