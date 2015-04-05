@@ -52,9 +52,9 @@ input:
 ;
 
 line:
-  EOL       { $$ = new Constante(-1); }
+  EOL       { $$ = new Int(-1); }
 | exp EOL   { $$ = $1; }
-| error EOL { $$ = new Constante(666); yyerrok; }
+| error EOL { $$ = new Int(666); yyerrok; }
 ;
 
 exp:
@@ -64,8 +64,8 @@ exp:
 | exp "/" exp				{ $$ = new Division($1,$3); }
 | "(" exp ")"				{ $$ = $2; }
 | IF exp THEN exp END	{ $$ = new If($2,$4); }
-| "(" error ")"			{ $$ = new Constante(777); }
-| INT							{ $$ = new Constante($1); }
+| "(" error ")"			{ $$ = new Int(777); }
+| INT							{ $$ = new Int($1); }
 ;
 
 %%

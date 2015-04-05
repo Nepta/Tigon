@@ -1,7 +1,7 @@
 #ifndef __Interpreter_H__
 #define __Interpreter_H__
 
-#include "../Data/Constante.h"
+#include "../Data/Int.h"
 #include "../Data/Block/If.h"
 #include "DivisionByZeroException.h"
 #include <iostream>
@@ -57,7 +57,7 @@ public:
 		push(left-right);
 	}
 	
-	void visite(Constante& c){
+	void visite(Int& c){
 		push(c.value());
 	}
 	
