@@ -21,7 +21,7 @@
 #include "Ast/Data/Operation/Subtraction.h"
 #include "Ast/Data/Operation/Multiplication.h"
 #include "Ast/Data/Operation/Division.h"
-#include "Ast/Control/Interpreter.h"
+#include "Ast/Control/PrettyPrinter.h"
 }
 
 %expect 0
@@ -29,6 +29,7 @@
 %left "*" "/"
 
 %token <int> INT "number"
+%token <std::string> STRING "string"
 %type <Visitable*> exp line
 
 %printer { yyo << $$; } <int>
@@ -48,7 +49,7 @@
 %%
 input:
   %empty
-| input line  { std::cout << *(new Interpreter(*($2))) << std::endl; }
+| input line  { std::cout << *(new PrettyPrinter(*($2))) << std::endl; }
 ;
 
 line:
@@ -66,6 +67,7 @@ exp:
 | IF exp THEN exp END	{ $$ = new If($2,$4); }
 | "(" error ")"			{ $$ = new Int(777); }
 | INT							{ $$ = new Int($1); }
+| STRING						{ $$ = new String($1); }
 ;
 
 %%

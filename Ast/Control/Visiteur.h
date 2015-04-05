@@ -8,6 +8,7 @@ class Division;
 class Multiplication;
 class Subtraction;
 class Int;
+class String;
 class If;
 
 class Visiteur{
@@ -17,6 +18,7 @@ public:
 	virtual void visite(Multiplication& operation) = 0;
 	virtual void visite(Subtraction& operation) = 0;
 	virtual void visite(Int& c) = 0;
+	virtual void visite(String& c) = 0;
 	virtual void visite(If& i) = 0;
 };
 

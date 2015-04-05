@@ -2,6 +2,7 @@
 #define __Interpreter_H__
 
 #include "../Data/Int.h"
+#include "../Data/String.h"
 #include "../Data/Block/If.h"
 #include "DivisionByZeroException.h"
 #include <iostream>
@@ -59,6 +60,10 @@ public:
 	
 	void visite(Int& c){
 		push(c.value());
+	}
+	
+	void visite(String& s){
+		push(9);
 	}
 	
 	void visite(If& i){

@@ -20,6 +20,7 @@
 "/"		return yy::parser::token::TOK_SLASH;
 "("		return yy::parser::token::TOK_LPAREN;
 ")"		return yy::parser::token::TOK_RPAREN;
+\".*\"   yylval->build<std::string>(yytext) ; return yy::parser::token::TOK_STRING;
 "if"		return yy::parser::token::TOK_IF;
 "then"	return yy::parser::token::TOK_THEN;
 "end"		return yy::parser::token::TOK_END;
