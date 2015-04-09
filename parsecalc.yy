@@ -22,7 +22,13 @@
 #include "Ast/Data/Operation/Multiplication.h"
 #include "Ast/Data/Operation/Division.h"
 #include "Ast/Control/PrettyPrinter.h"
+#include "Ast/Control/Interpreter.h"
 }
+
+%{
+#include "Ast/Data/Visitable.h"
+void (*processExp)(Visitable*);
+%}
 
 %expect 0
 %left "+" "-"
@@ -44,12 +50,13 @@
   IF		"if"
   THEN	"then"
   END		"end"
-  EOL "end of line"
+  EOL		"end of line"
   EOF 0
+
 %%
 input:
   %empty
-| input line  { std::cout << *(new PrettyPrinter(*($2))) << std::endl; }
+| input line  { processExp($2); }
 ;
 
 line:
@@ -77,8 +84,23 @@ void yy::parser::error(const location_type& loc, const std::string& msg){
 	nerrs++;
 }
 
+void interpreter(Visitable* v){
+	Interpreter i(*v);
+	std::cout << i << std::endl;
+}
+
+void prettyPrinter(Visitable* v){
+	PrettyPrinter p(*v);
+	std::cout << p << std::endl;
+}
+
 int main(){
 //%	yydebug = !!getenv("YYDEBUG");
+	if(!!getenv("YYPRINT")){
+		processExp = prettyPrinter;
+	}else{
+		processExp = interpreter;
+	}
 	unsigned nerrs = 0;
 	yy::parser p(nerrs);
 	p.set_debug_level(!!getenv("YYDEBUG"));
