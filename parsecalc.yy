@@ -33,6 +33,7 @@ void (*processExp)(Visitable*);
 %expect 0
 %left "+" "-"
 %left "*" "/"
+%right "then" "else" //http://stackoverflow.com/questions/12731922/reforming-the-grammar-to-remove-shift-reduce-conflict-in-if-then-else/12734499#12734499
 
 %token <int> INT "number"
 %token <std::string> STRING "string"
@@ -49,7 +50,7 @@ void (*processExp)(Visitable*);
   STAR	"*"
   IF		"if"
   THEN	"then"
-  END		"end"
+  ELSE	"else"
   EOL		"end of line"
   EOF 0
 
@@ -66,15 +67,16 @@ line:
 ;
 
 exp:
-  exp "+" exp				{ $$ = new Addition($1,$3); }
-| exp "-" exp				{ $$ = new Subtraction($1,$3); }
-| exp "*" exp				{ $$ = new Multiplication($1,$3); }
-| exp "/" exp				{ $$ = new Division($1,$3); }
-| "(" exp ")"				{ $$ = $2; }
-| IF exp THEN exp END	{ $$ = new If($2,$4); }
-| "(" error ")"			{ $$ = new Int(777); }
-| INT							{ $$ = new Int($1); }
-| STRING						{ $$ = new String($1); }
+  exp "+" exp							{ $$ = new Addition($1,$3); }
+| exp "-" exp							{ $$ = new Subtraction($1,$3); }
+| exp "*" exp							{ $$ = new Multiplication($1,$3); }
+| exp "/" exp							{ $$ = new Division($1,$3); }
+| "(" exp ")"							{ $$ = $2; }
+| "if" exp "then" exp "else"		{ $$ = new If($2,$4); }
+| "if" exp "then" exp				{ $$ = new If($2,$4); }
+| "(" error ")"						{ $$ = new Int(777); }
+| "number"								{ $$ = new Int($1); }
+| "string"								{ $$ = new String($1); }
 ;
 
 %%

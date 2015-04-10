@@ -23,7 +23,7 @@
 \".*\"   yylval->build<std::string>(yytext) ; return yy::parser::token::TOK_STRING;
 "if"		return yy::parser::token::TOK_IF;
 "then"	return yy::parser::token::TOK_THEN;
-"end"		return yy::parser::token::TOK_END;
+"else"	return yy::parser::token::TOK_ELSE;
 [0-9]+	yylval->build<int>(strtol(yytext, 0, 10)) ; return yy::parser::token::TOK_INT;
 " "+		yylloc->step(); continue;
 "\n"		yylloc->lines(1); yylloc->columns(1); yylloc->step(); return yy::parser::token::TOK_EOL;
