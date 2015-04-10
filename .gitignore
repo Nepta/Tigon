@@ -3,3 +3,4 @@
 calc
 *.o
 *.hh
+*.output

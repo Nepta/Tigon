@@ -1,5 +1,5 @@
 BISON = bison
-BISONFLAGS = -Wall
+BISONFLAGS = -Wall -v
 FLEX = flex
 FLEXFLAGS =
 CFLAGS=-Wall -Wextra -std=c++11 -Wno-deprecated-register
@@ -36,7 +36,7 @@ check: calc
 .PRECIOUS: %.cpp
 
 CLEANFILES = \
-  *~ *.o calc *.hh\
+  *~ *.o calc *.hh *.output\
   parsecalc.cpp parsecalc.hpp parsecalc.output \
   scancalc.cpp
 
