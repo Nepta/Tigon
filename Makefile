@@ -8,15 +8,15 @@ all: calc
 calc: parsecalc.o scancalc.o
 	$(CXX) $^ -o $@
 
-scancalc.o: parsecalc.hpp $(wildcard Ast/Data/*.h Ast/Data/Operation/*.h Ast/Control/*.h)
+scancalc.o: parsecalc.hpp $(wildcard Ast/Data/*.h Ast/Data/Operation/*.h Ast/Control/*.h) 
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -c $< -o $@
 
-%.cpp: %.ll
+%.cpp: %.ll 
 	$(FLEX) $(FLEXFLAGS) -o$@ $<
 
-%.cpp: %.yy
+%.cpp: %.yy $(wildcard Ast/Data/*.h Ast/Data/Operation/*.h Ast/Control/*.h) 
 	$(BISON) $(BISONFLAGS) $< -o$@
 
 .PHONY: check
