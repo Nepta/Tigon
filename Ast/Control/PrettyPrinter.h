@@ -16,27 +16,35 @@ public:
 	PrettyPrinter(Visitable& v) : ast_(v){}
 
 	void visite(Addition& operation){
+		s_ << " (";
 		operation.left()->accept(*this);
 		s_ << " + ";
 		operation.right()->accept(*this);
+		s_ << ") ";
 	}
 
 	void visite(Division& operation){
+		s_ << " (";
 		operation.left()->accept(*this);
 		s_ << " ÷ ";
 		operation.right()->accept(*this);
+		s_ << ") ";
 	}
 
 	void visite(Multiplication& operation){
+		s_ << " (";
 		operation.left()->accept(*this);
 		s_ << " × ";
 		operation.right()->accept(*this);
+		s_ << ") ";
 	}
 
 	void visite(Subtraction& operation){
+		s_ << " (";
 		operation.left()->accept(*this);
 		s_ << " - ";
 		operation.right()->accept(*this);
+		s_ << ") ";
 	}
 	
 	void visite(Int& c){
