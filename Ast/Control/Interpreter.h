@@ -73,6 +73,9 @@ public:
 			i.expression()->accept(*this);
 		}
 	}
+	
+	void visite(Variable& v){
+	}
 		
 	friend
 	std::ostream& operator<<(std::ostream& ostr, Interpreter& i);

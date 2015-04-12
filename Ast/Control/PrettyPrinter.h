@@ -63,6 +63,10 @@ public:
 		s_ << " end";
 	}
 
+	void visite(Variable& v){
+		s_ << v.value();
+	}
+
 	friend
 	std::ostream& operator<<(std::ostream& ostr, PrettyPrinter& v);	
 };

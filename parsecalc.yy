@@ -79,7 +79,7 @@ exp:
 | "(" error ")"						{ $$ = new Int(777); }
 | "number"								{ $$ = new Int($1); }
 | "string"								{ $$ = new String($1); }
-| "var" "varname"						
+| "var" "varname"						{ $$ = new Variable($2);}
 ;
 
 %%

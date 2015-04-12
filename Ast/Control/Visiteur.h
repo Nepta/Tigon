@@ -10,6 +10,7 @@ class Subtraction;
 class Int;
 class String;
 class If;
+class Variable;
 
 class Visiteur{
 public:
@@ -20,6 +21,7 @@ public:
 	virtual void visite(Int& c) = 0;
 	virtual void visite(String& c) = 0;
 	virtual void visite(If& i) = 0;
+	virtual void visite(Variable& i) = 0;
 };
 
 #endif /* __Visiteur_H__ */
