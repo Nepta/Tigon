@@ -37,6 +37,7 @@ void (*processExp)(Visitable*);
 
 %token <int> INT "number"
 %token <std::string> STRING "string"
+%token <std::string> VARNAME "varname"
 %type <Visitable*> exp line
 
 %printer { yyo << $$; } <int>
@@ -51,6 +52,7 @@ void (*processExp)(Visitable*);
   IF		"if"
   THEN	"then"
   ELSE	"else"
+  VAR		"var"
   EOL		"end of line"
   EOF 0
 
@@ -77,12 +79,13 @@ exp:
 | "(" error ")"						{ $$ = new Int(777); }
 | "number"								{ $$ = new Int($1); }
 | "string"								{ $$ = new String($1); }
+| "var" "varname"						
 ;
 
 %%
 
 void yy::parser::error(const location_type& loc, const std::string& msg){
-	std::cerr << loc << msg << std::endl;
+	std::cerr << loc << ": " << msg << std::endl;
 	nerrs++;
 }
 
