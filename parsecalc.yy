@@ -82,8 +82,8 @@ exp:
 | exp "*" exp							{ $$ = new Multiplication($1,$3); }
 | exp "/" exp							{ $$ = new Division($1,$3); }
 | "(" exp ")"							{ $$ = $2; }
-| "if" exp "then" exp "else" exp	{ $$ = new If($2,$4); }
-| "if" exp "then" exp				{ $$ = new If($2,$4); }
+| "if" exp "then" exp "else" exp	{ $$ = new If($2,$4,$6); }
+| "if" exp "then" exp				{ $$ = new If($2,$4,new Int(0)); }
 | "while" exp "do" exp				{ $$ = new While($2,$4); }
 | "(" error ")"						{ $$ = new Int(777); }
 | "number"								{ $$ = new Int($1); }

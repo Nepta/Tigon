@@ -4,18 +4,24 @@
 #include "../Visitable.h"
 
 class If : public Visitable{
-	Visitable *condition_;
-	Visitable *expression_;
+	Visitable* condition_;
+	Visitable* trueExpression_;
+	Visitable* falseExpression_;
 
 public:
-	If(Visitable *condition, Visitable *expression) : condition_(condition), expression_(expression){}
+	If(Visitable* condition, Visitable* trueExpression, Visitable* falseExpression) :
+		condition_(condition), trueExpression_(trueExpression_), falseExpression_(falseExpression){}
 	
 	Visitable* condition(){
 		return condition_;
 	}
 	
-	Visitable* expression(){
-		return expression_;
+	Visitable* trueExpression(){
+		return trueExpression_;
+	}
+	
+	Visitable* falseExpression(){
+		return falseExpression_;
 	}
 	
 	void accept(Visiteur& v){
