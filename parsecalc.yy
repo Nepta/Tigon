@@ -34,11 +34,11 @@ VariableList variableList_;
 %}
 
 %expect 0
+%precedence ":="
 %left "+" "-"
 %left "*" "/"
 %right "then" "else" //http://stackoverflow.com/questions/12731922/reforming-the-grammar-to-remove-shift-reduce-conflict-in-if-then-else/12734499#12734499
 %precedence "do"
-%precedence ":="
 
 %token <int> INT "number"
 %token <std::string> STRING "string"
@@ -82,7 +82,7 @@ exp:
 | exp "*" exp							{ $$ = new Multiplication($1,$3); }
 | exp "/" exp							{ $$ = new Division($1,$3); }
 | "(" exp ")"							{ $$ = $2; }
-| "if" exp "then" exp "else"		{ $$ = new If($2,$4); }
+| "if" exp "then" exp "else" exp	{ $$ = new If($2,$4); }
 | "if" exp "then" exp				{ $$ = new If($2,$4); }
 | "while" exp "do" exp				{ $$ = new While($2,$4); }
 | "(" error ")"						{ $$ = new Int(777); }
