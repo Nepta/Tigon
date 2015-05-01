@@ -37,6 +37,7 @@ VariableList variableList_;
 %left "+" "-"
 %left "*" "/"
 %right "then" "else" //http://stackoverflow.com/questions/12731922/reforming-the-grammar-to-remove-shift-reduce-conflict-in-if-then-else/12734499#12734499
+%precedence "do"
 
 %token <int> INT "number"
 %token <std::string> STRING "string"
@@ -57,6 +58,8 @@ VariableList variableList_;
   ELSE	"else"
   VAR		"var"
   ASSIGN	":="
+  WHILE	"while"
+  DO		"do"
   EOL		"end of line"
   EOF 0
 
@@ -86,6 +89,7 @@ exp:
 | "var" "varname" ":=" "number"	{ Int *number = new Int($4); variableList_.addValue($2,number); $$ = number;}
 | "var" "varname" ":=" "string"	{ String *string = new String($4); variableList_.addValue($2,string); $$ = string;}
 | "varname"								{ $$ = variableList_.getValue($1); }
+| "while" exp "do" exp				{ $$ = new Int(42);}
 ;
 
 %%
