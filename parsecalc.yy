@@ -38,6 +38,7 @@ VariableList variableList_;
 %left "*" "/"
 %right "then" "else" //http://stackoverflow.com/questions/12731922/reforming-the-grammar-to-remove-shift-reduce-conflict-in-if-then-else/12734499#12734499
 %precedence "do"
+%precedence ":="
 
 %token <int> INT "number"
 %token <std::string> STRING "string"
@@ -83,13 +84,14 @@ exp:
 | "(" exp ")"							{ $$ = $2; }
 | "if" exp "then" exp "else"		{ $$ = new If($2,$4); }
 | "if" exp "then" exp				{ $$ = new If($2,$4); }
+| "while" exp "do" exp				{ $$ = new While($2,$4); }
 | "(" error ")"						{ $$ = new Int(777); }
 | "number"								{ $$ = new Int($1); }
 | "string"								{ $$ = new String($1); }
-| "var" "varname" ":=" "number"	{ Int *number = new Int($4); variableList_.addValue($2,number); $$ = number;}
-| "var" "varname" ":=" "string"	{ String *string = new String($4); variableList_.addValue($2,string); $$ = string;}
+| "var" "varname" ":=" "number"	{ Int *number = new Int($4); variableList_.addValue($2,number); $$ = number; }
+| "var" "varname" ":=" "string"	{ String *string = new String($4); variableList_.addValue($2,string); $$ = string; }
+| "varname" ":=" exp					{ variableList_.addValue($1,$3); $$ = variableList_.getValue($1); }
 | "varname"								{ $$ = variableList_.getValue($1); }
-| "while" exp "do" exp				{ $$ = new Int(42);}
 ;
 
 %%

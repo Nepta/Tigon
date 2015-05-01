@@ -27,11 +27,12 @@
 [0-9]+						yylval->build<int>(strtol(yytext, 0, 10)) ; return yy::parser::token::TOK_INT;
 ":="    						return yy::parser::token::TOK_ASSIGN;
 "var"    					return yy::parser::token::TOK_VAR;
+"while"						return yy::parser::token::TOK_WHILE;
+"do"							return yy::parser::token::TOK_DO;
+
 [_a-zA-Z][_a-zA-Z0-9]*	yylval->build<std::string>(yytext) ; return yy::parser::token::TOK_VARNAME;
 " "+							yylloc->step(); continue;
 "\n"							yylloc->lines(1); yylloc->columns(1); yylloc->step(); return yy::parser::token::TOK_EOL;
-"while"						return yy::parser::token::TOK_WHILE;
-"do"							return yy::parser::token::TOK_DO;
 .								fprintf (stderr, "error: invalid character: %c\n", *yytext);
 <<EOF>>						return yy::parser::token::TOK_EOF;
 %%

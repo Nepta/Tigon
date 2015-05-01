@@ -4,6 +4,7 @@
 #include "../Data/Int.h"
 #include "../Data/String.h"
 #include "../Data/Block/If.h"
+#include "../Data/Block/While.h"
 #include "DivisionByZeroException.h"
 #include <iostream>
 
@@ -71,6 +72,14 @@ public:
 		int condition = pullVar();
 		if(condition != 0){
 			i.expression()->accept(*this);
+		}
+	}
+	
+	void visite(While& w){
+		w.condition()->accept(*this);
+		int condition = pullVar();
+		if(condition != 0){
+			w.expression()->accept(*this);
 		}
 	}
 	

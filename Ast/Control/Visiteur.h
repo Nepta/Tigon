@@ -10,6 +10,7 @@ class Subtraction;
 class Int;
 class String;
 class If;
+class While;
 class VariableList;
 
 class Visiteur{
@@ -22,6 +23,7 @@ public:
 	virtual void visite(String& c) = 0;
 	virtual void visite(If& i) = 0;
 	virtual void visite(VariableList& i) = 0;
+	virtual void visite(While& w) = 0;
 };
 
 #endif /* __Visiteur_H__ */

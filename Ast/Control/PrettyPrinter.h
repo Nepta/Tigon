@@ -9,6 +9,7 @@
 #include "../Data/String.h"
 #include "../Data/VariableList.h"
 #include "../Data/Block/If.h"
+#include "../Data/Block/While.h"
 
 class PrettyPrinter : public Visiteur{
 	Visitable& ast_;
@@ -61,6 +62,14 @@ public:
 		i.condition()->accept(*this);
 		s_ << " then ";
 		i.expression()->accept(*this);
+		s_ << " end";
+	}
+
+	void visite(While& w){
+		s_ << "while ";
+		w.condition()->accept(*this);
+		s_ << " do ";
+		w.expression()->accept(*this);
 		s_ << " end";
 	}
 
