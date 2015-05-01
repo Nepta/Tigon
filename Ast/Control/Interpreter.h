@@ -75,7 +75,9 @@ public:
 		i.condition()->accept(*this);
 		int condition = pullVar();
 		if(condition != 0){
-			i.expression()->accept(*this);
+			i.trueExpression()->accept(*this);
+		}else{
+			i.falseExpression()->accept(*this);
 		}
 	}
 	

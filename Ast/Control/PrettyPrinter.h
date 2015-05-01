@@ -61,7 +61,9 @@ public:
 		s_ << "if ";
 		i.condition()->accept(*this);
 		s_ << " then ";
-		i.expression()->accept(*this);
+		i.trueExpression()->accept(*this);
+		s_ << " else ";
+		i.falseExpression()->accept(*this);
 		s_ << " end";
 	}
 
