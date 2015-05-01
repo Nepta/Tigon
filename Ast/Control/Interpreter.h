@@ -3,6 +3,10 @@
 
 #include "../Data/Int.h"
 #include "../Data/String.h"
+#include "../Data/Operation/Addition.h"
+#include "../Data/Operation/Subtraction.h"
+#include "../Data/Operation/Multiplication.h"
+#include "../Data/Operation/Division.h"
 #include "../Data/Block/If.h"
 #include "../Data/Block/While.h"
 #include "DivisionByZeroException.h"
@@ -86,6 +90,11 @@ public:
 	void visite(VariableList& v){
 	}
 		
+	int peakVar(){
+		ast_.accept(*this);
+		return var_;
+	}
+	
 	friend
 	std::ostream& operator<<(std::ostream& ostr, Interpreter& i);
 };
