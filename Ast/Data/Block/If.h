@@ -10,7 +10,7 @@ class If : public Visitable{
 
 public:
 	If(Visitable* condition, Visitable* trueExpression, Visitable* falseExpression) :
-		condition_(condition), trueExpression_(trueExpression_), falseExpression_(falseExpression){}
+		condition_(condition), trueExpression_(trueExpression), falseExpression_(falseExpression){}
 	
 	Visitable* condition(){
 		return condition_;
