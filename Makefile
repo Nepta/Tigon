@@ -2,7 +2,7 @@ BISON = bison
 BISONFLAGS = -Wall -v
 FLEX = flex
 FLEXFLAGS =
-CFLAGS=-Wall -Wextra -std=c++11 -Wno-deprecated-register
+CFLAGS=-Wall -Wextra -std=c++11 -Wno-deprecated-register -ggdb
 all: calc
 
 calc: parsecalc.o scancalc.o

@@ -25,6 +25,7 @@
 "then"						return yy::parser::token::TOK_THEN;
 "else"						return yy::parser::token::TOK_ELSE;
 [0-9]+						yylval->build<int>(strtol(yytext, 0, 10)) ; return yy::parser::token::TOK_INT;
+":="    						return yy::parser::token::TOK_ASSIGN;
 "var"    					return yy::parser::token::TOK_VAR;
 [_a-zA-Z][_a-zA-Z0-9]*	yylval->build<std::string>(yytext) ; return yy::parser::token::TOK_VARNAME;
 " "+							yylloc->step(); continue;

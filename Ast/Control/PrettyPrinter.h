@@ -7,6 +7,7 @@
 
 #include "../Data/Int.h"
 #include "../Data/String.h"
+#include "../Data/VariableList.h"
 #include "../Data/Block/If.h"
 
 class PrettyPrinter : public Visiteur{
@@ -63,8 +64,8 @@ public:
 		s_ << " end";
 	}
 
-	void visite(Variable& v){
-		s_ << v.value();
+	void visite(VariableList& v){
+		s_ << "miaou";
 	}
 
 	friend

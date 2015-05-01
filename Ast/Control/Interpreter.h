@@ -74,7 +74,7 @@ public:
 		}
 	}
 	
-	void visite(Variable& v){
+	void visite(VariableList& v){
 	}
 		
 	friend

@@ -27,7 +27,10 @@
 
 %{
 #include "Ast/Data/Visitable.h"
+#include "Ast/Data/VariableList.h"
+
 void (*processExp)(Visitable*);
+VariableList variableList_;
 %}
 
 %expect 0
@@ -53,6 +56,7 @@ void (*processExp)(Visitable*);
   THEN	"then"
   ELSE	"else"
   VAR		"var"
+  ASSIGN	":="
   EOL		"end of line"
   EOF 0
 
@@ -79,7 +83,9 @@ exp:
 | "(" error ")"						{ $$ = new Int(777); }
 | "number"								{ $$ = new Int($1); }
 | "string"								{ $$ = new String($1); }
-| "var" "varname"						{ $$ = new Variable($2);}
+| "var" "varname" ":=" "number"	{ Int *number = new Int($4); variableList_.addValue($2,number); $$ = number;}
+| "var" "varname" ":=" "string"	{ String *string = new String($4); variableList_.addValue($2,string); $$ = string;}
+| "varname"								{ $$ = variableList_.getValue($1); }
 ;
 
 %%
@@ -101,10 +107,10 @@ void prettyPrinter(Visitable* v){
 
 int main(){
 //%	yydebug = !!getenv("YYDEBUG");
-	if(!!getenv("YYPRINT")){
-		processExp = prettyPrinter;
-	}else{
+	if(!!getenv("YYEVAL")){
 		processExp = interpreter;
+	}else{
+		processExp = prettyPrinter;
 	}
 	unsigned nerrs = 0;
 	yy::parser p(nerrs);
