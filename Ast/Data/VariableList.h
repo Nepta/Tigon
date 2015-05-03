@@ -8,15 +8,21 @@
 class VariableList{
 	using VarArray = std::unordered_map<std::string, Visitable*>;
 	using Scope = std::vector<VarArray>;
-	VarArray variableList_;
+	Scope scopedVariableList_ = {std::unordered_map<std::string, Visitable*>()};
+	int scopeDeep = 0;
 
 public:
 	Visitable* getValue(std::string name){
-		return variableList_[name];
+		for(auto variableList = scopedVariableList_.rbegin(); variableList != scopedVariableList_.rend(); variableList++){
+			if(variableList->count(name) > 0){
+				return (*variableList)[name];
+			}
+		}
+		return nullptr;
 	}
 	
 	void addValue(std::string name, Visitable *value){
-		variableList_[name] = value;
+		scopedVariableList_[scopeDeep][name] = value;
 	}
 };
 

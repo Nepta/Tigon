@@ -73,10 +73,15 @@ public:
 		pushVar(value);
 	}
 	
-	void visite(ReadVariable& v){//FIXME variable not found exception
+	void visite(ReadVariable& v){
 		std::string variableName = v.variableName();
 		Visitable* variable = variableList_.getValue(variableName);
-		pushVar(((Int*)variable)->value());
+		if(variable != nullptr){
+			Int* variableAsInt = dynamic_cast<Int*>(variable);
+			pushVar(variableAsInt->value());
+		}else{
+			pushVar(0); //FIXME?
+		}
 	}
 	
 	void visite(Int& c){
