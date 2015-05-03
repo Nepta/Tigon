@@ -51,7 +51,8 @@ public:
 	}
 	
 	void visite(Affectation& a){
-		s_ << a.variableName();
+		std::string variableName = a.variableName();
+		s_ << variableName;
 		s_ << " := ";
 		a.expression()->accept(*this);
 	}

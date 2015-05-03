@@ -67,9 +67,8 @@ public:
 	void visite(Affectation& a){
 		a.expression()->accept(*this);
 		std::string variableName = a.variableName();
-		int value = pullVar();
-//		variableList_.addValue(variableName,value);
-		pushVar(value);
+		int value = peakVar();
+		variableList_.addValue(variableName,new Int(value));
 	}
 	
 	void visite(Int& c){
