@@ -13,7 +13,6 @@
 #include "DivisionByZeroException.h"
 #include <iostream>
 #include "../Data/VariableList.h"
-#include <typeinfo>
 
 class Interpreter : public Visiteur{
 	int var_;
@@ -58,9 +57,7 @@ public:
 	}
 
 	void visite(Subtraction& operation){
-		std::cerr << "\nmiaou : ";
 		operation.left()->accept(*this);
-		std::cerr << typeid(operation.left()).name() << std::endl;
 		int left = pullVar();
 		operation.right()->accept(*this);
 		int right = pullVar();
@@ -102,18 +99,13 @@ public:
 	void visite(While& w){
 		w.condition()->accept(*this);
 		int condition = pullVar();
-		int watchDog = 17;
-		while(condition != 0 && watchDog != 0){
+		while(condition != 0){
 			w.expression()->accept(*this);
 			pullVar();
 			w.condition()->accept(*this);
 			condition = pullVar();
-			watchDog--;
 			std::string pause;
 			std::cin >> pause;
-		}
-		if(watchDog == 0){
-			std::cerr << "ouaf" << std::endl;
 		}
 	}
 	

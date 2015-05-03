@@ -19,7 +19,6 @@ public:
 		try{
 			oldValue = ((Int*)variableList_.at(name))->value();
 		}catch(std::exception& e){}
-		std::cerr << name << ": " << oldValue << " -> " << ((Int*)value)->value() << std::endl;
 		variableList_[name] = value;
 	}
 };
