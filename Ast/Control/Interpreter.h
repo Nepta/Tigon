@@ -21,7 +21,7 @@ class Interpreter : public Visiteur{
 	int var_;
 
 private:
-	void push(int var){
+	void pushVar(int var){
 		var_ = var;
 	}
 	
@@ -37,7 +37,7 @@ public:
 		int left = pullVar();
 		operation.right()->accept(*this);
 		int right = pullVar();
-		push(left+right);
+		pushVar(left+right);
 	}
 
 	void visite(Division& operation){
@@ -48,7 +48,7 @@ public:
 		if(right == 0){
 			throw DivisionByZeroException();
 		}
-		push(left/right);
+		pushVar(left/right);
 	}
 
 	void visite(Multiplication& operation){
@@ -56,7 +56,7 @@ public:
 		int left = pullVar();
 		operation.right()->accept(*this);
 		int right = pullVar();
-		push(left*right);
+		pushVar(left*right);
 	}
 
 	void visite(Subtraction& operation){
@@ -64,7 +64,7 @@ public:
 		int left = pullVar();
 		operation.right()->accept(*this);
 		int right = pullVar();
-		push(left-right);
+		pushVar(left-right);
 	}
 
 	void visite(Affectation& a){
@@ -76,11 +76,11 @@ public:
 	}
 	
 	void visite(Int& c){
-		push(c.value());
+		pushVar(c.value());
 	}
 	
 	void visite(String& s){
-		push(9);
+		pushVar(9); //FIXME
 	}
 	
 	void visite(If& i){
