@@ -23,6 +23,8 @@
 #include "Ast/Data/Operation/Division.h"
 #include "Ast/Control/PrettyPrinter.h"
 #include "Ast/Control/Interpreter.h"
+#include "Ast/Data/VariableList.h"
+extern VariableList variableList_;
 }
 
 %{
@@ -102,12 +104,12 @@ void yy::parser::error(const location_type& loc, const std::string& msg){
 }
 
 void interpreter(Visitable* v){
-	Interpreter i(*v);
+	Interpreter i(variableList_);
 	std::cout << i << std::endl;
 }
 
 void prettyPrinter(Visitable* v){
-	PrettyPrinter p(*v);
+	PrettyPrinter p(variableList_);
 	std::cout << p << std::endl;
 }
 

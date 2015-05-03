@@ -13,10 +13,10 @@
 #include "../Data/Block/While.h"
 
 class PrettyPrinter : public Visiteur{
-	Visitable& ast_;
 	std::stringstream s_;
+
 public:
-	PrettyPrinter(Visitable& v) : ast_(v){}
+	PrettyPrinter(VariableList& v) : Visiteur(v){}
 
 	void visite(Addition& operation){
 		s_ << " (";
@@ -88,9 +88,9 @@ public:
 
 inline
 std::ostream& operator<<(std::ostream& ostr, PrettyPrinter& v){
-	v.s_.str(std::string());
-	v.ast_.accept(v);
-	ostr << v.s_.str();
+//	v.s_.str(std::string());
+//	v.ast_.accept(v);
+//	ostr << v.s_.str();
 	return ostr;
 }
 #endif /* __PrettyPrinter_H__ */

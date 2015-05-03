@@ -12,9 +12,14 @@ class String;
 class Affectation;
 class If;
 class While;
+class VariableList;
 
 class Visiteur{
+protected:
+	VariableList& variableList_;
+
 public:
+	Visiteur(VariableList& variableList) : variableList_(variableList){}
 	virtual void visite(Addition& operation) = 0;
 	virtual void visite(Division& operation) = 0;
 	virtual void visite(Multiplication& operation) = 0;

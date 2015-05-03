@@ -4,7 +4,7 @@
 #include "Visitable.h"
 #include "Constante.h"
 #include <unordered_map>
-#include "../Control/Interpreter.h"
+//#include "../Control/Interpreter.h"
 
 class VariableList{
 	std::unordered_map<std::string, Constante*> variableList_;
@@ -19,10 +19,10 @@ public:
 	}
 	
 	void addValue(std::string name, Visitable *v){
-		Interpreter i(*v);
-		int value = i.peakVar();
-		Constante* interpretedValue = new Int(value);
-		variableList_[name] = interpretedValue;
+//		Interpreter i(*v);
+//		int value = i.peakVar();
+//		Constante* interpretedValue = new Int(value);
+//		variableList_[name] = interpretedValue;
 	}
 };
 

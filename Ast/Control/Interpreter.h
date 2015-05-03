@@ -12,12 +12,9 @@
 #include "../Data/Block/While.h"
 #include "DivisionByZeroException.h"
 #include <iostream>
-
 #include "../Data/VariableList.h"
-extern VariableList variableList_;
 
 class Interpreter : public Visiteur{
-	Visitable& ast_;
 	int var_;
 
 private:
@@ -30,7 +27,7 @@ private:
 	}
 	
 public:
-	Interpreter(Visitable& v) : ast_(v){}
+	Interpreter(VariableList& v) : Visiteur(v){}
 	
 	void visite(Addition& operation){
 		operation.left()->accept(*this);
@@ -71,7 +68,7 @@ public:
 		a.expression()->accept(*this);
 		std::string variableName = a.variableName();
 		int value = pullVar();
-		variableList_.addValue(variableName,value);
+//		variableList_.addValue(variableName,value);
 		pushVar(value);
 	}
 	
@@ -102,8 +99,9 @@ public:
 	}
 	
 	int peakVar(){
-		ast_.accept(*this);
-		return var_;
+//		ast_.accept(*this);
+//		return var_;
+		return 42;
 	}
 	
 	friend
@@ -113,7 +111,6 @@ public:
 inline
 std::ostream& operator<<(std::ostream& ostr, Interpreter& i){
 	try{
-		i.ast_.accept(i);
 		ostr << std::to_string(i.pullVar());
 	}catch(DivisionByZeroException& e){
 		ostr << std::string(e.what());
