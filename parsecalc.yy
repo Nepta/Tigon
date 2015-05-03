@@ -117,24 +117,45 @@ void yy::parser::error(const location_type& loc, const std::string& msg){
 	nerrs++;
 }
 
-void interpreter(Visitable* v){
+void verboseInterpreter(Visitable* v){
 	Interpreter i(variableList_);
 	v->accept(i);
 	std::cout << i << std::endl;
 }
 
-void prettyPrinter(Visitable* v){
+void interpreter(Visitable* v){
+	Interpreter i(variableList_);
+	v->accept(i);
+}
+
+void verbosePrettyPrinter(Visitable* v){
 	PrettyPrinter p(variableList_);
 	v->accept(p);
 	std::cout << p << std::endl;
 }
 
-int main(){
+void prettyPrinter(Visitable* v){
+	PrettyPrinter p(variableList_);
+	v->accept(p);
+}
+
+int main(int argc, char* argv[]){
 //%	yydebug = !!getenv("YYDEBUG");
-	if(!!getenv("YYEVAL")){
-		processExp = interpreter;
+	if(argc == 2){
+		std::string command(argv[1]);
+		if(command == "-v"){
+			if(!!getenv("YYEVAL")){
+				processExp = verboseInterpreter;
+			}else{
+				processExp = verbosePrettyPrinter;
+			}
+		}
 	}else{
-		processExp = prettyPrinter;
+		if(!!getenv("YYEVAL")){
+			processExp = interpreter;
+		}else{
+			processExp = prettyPrinter;
+		}
 	}
 	unsigned nerrs = 0;
 	yy::parser p(nerrs);
@@ -143,3 +164,4 @@ int main(){
 //%	nerrs += !!yyparse(&nerrs);
 	return !!nerrs;
 }
+
