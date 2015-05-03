@@ -7,6 +7,7 @@
 #include "../Data/Operation/Subtraction.h"
 #include "../Data/Operation/Multiplication.h"
 #include "../Data/Operation/Division.h"
+#include "../Data/Affectation.h"
 #include "../Data/Block/If.h"
 #include "../Data/Block/While.h"
 #include "DivisionByZeroException.h"
@@ -61,6 +62,9 @@ public:
 		operation.right()->accept(*this);
 		int right = pullVar();
 		push(left-right);
+	}
+
+	void visite(Affectation& a){
 	}
 	
 	void visite(Int& c){

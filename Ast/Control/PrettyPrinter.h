@@ -7,6 +7,7 @@
 
 #include "../Data/Int.h"
 #include "../Data/String.h"
+#include "../Data/Affectation.h"
 #include "../Data/VariableList.h"
 #include "../Data/Block/If.h"
 #include "../Data/Block/While.h"
@@ -47,6 +48,12 @@ public:
 		s_ << " - ";
 		operation.right()->accept(*this);
 		s_ << ") ";
+	}
+	
+	void visite(Affectation& a){
+		s_ << a.variableName();
+		s_ << " := ";
+		a.expression()->accept(*this);
 	}
 	
 	void visite(Int& c){

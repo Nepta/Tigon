@@ -90,7 +90,7 @@ exp:
 | "string"								{ $$ = new String($1); }
 | "var" "varname" ":=" "number"	{ Int *number = new Int($4); variableList_.addValue($2,number); $$ = number; }
 | "var" "varname" ":=" "string"	{ String *string = new String($4); variableList_.addValue($2,string); $$ = string; }
-| "varname" ":=" exp					{ variableList_.addValue($1,$3); $$ = variableList_.getValue($1); }
+| "varname" ":=" exp					{ $$ = new Affectation($1,$3); }
 | "varname"								{ $$ = variableList_.getValue($1); }
 ;
 
