@@ -13,6 +13,9 @@
 #include "DivisionByZeroException.h"
 #include <iostream>
 
+#include "../Data/VariableList.h"
+extern VariableList variableList_;
+
 class Interpreter : public Visiteur{
 	Visitable& ast_;
 	int var_;
@@ -65,6 +68,11 @@ public:
 	}
 
 	void visite(Affectation& a){
+		a.expression()->accept(*this);
+		std::string variableName = a.variableName();
+		int value = pullVar();
+		variableList_.addValue(variableName,value);
+		pushVar(value);
 	}
 	
 	void visite(Int& c){
@@ -93,9 +101,6 @@ public:
 		}
 	}
 	
-	void visite(VariableList& v){
-	}
-		
 	int peakVar(){
 		ast_.accept(*this);
 		return var_;

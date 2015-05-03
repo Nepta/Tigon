@@ -12,7 +12,6 @@ class String;
 class Affectation;
 class If;
 class While;
-class VariableList;
 
 class Visiteur{
 public:
@@ -24,7 +23,6 @@ public:
 	virtual void visite(String& c) = 0;
 	virtual void visite(Affectation& a) = 0;
 	virtual void visite(If& i) = 0;
-	virtual void visite(VariableList& i) = 0;
 	virtual void visite(While& w) = 0;
 };
 

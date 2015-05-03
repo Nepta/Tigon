@@ -82,10 +82,6 @@ public:
 		s_ << " end";
 	}
 
-	void visite(VariableList& v){
-		s_ << "miaou";
-	}
-
 	friend
 	std::ostream& operator<<(std::ostream& ostr, PrettyPrinter& v);	
 };
