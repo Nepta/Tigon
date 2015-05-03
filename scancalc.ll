@@ -22,12 +22,13 @@
 "/"							return yy::parser::token::TOK_SLASH;
 "("							return yy::parser::token::TOK_LPAREN;
 ")"							return yy::parser::token::TOK_RPAREN;
+":="    						return yy::parser::token::TOK_ASSIGN;
+"="							return yy::parser::token::TOK_EQUAL;
 \".*\"   					yylval->build<std::string>(yytext) ; return yy::parser::token::TOK_STRING;
 "if"							return yy::parser::token::TOK_IF;
 "then"						return yy::parser::token::TOK_THEN;
 "else"						return yy::parser::token::TOK_ELSE;
 [0-9]+						yylval->build<int>(strtol(yytext, 0, 10)) ; return yy::parser::token::TOK_INT;
-":="    						return yy::parser::token::TOK_ASSIGN;
 "var"    					return yy::parser::token::TOK_VAR;
 "while"						return yy::parser::token::TOK_WHILE;
 "do"							return yy::parser::token::TOK_DO;

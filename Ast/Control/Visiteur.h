@@ -14,6 +14,7 @@ class Affectation;
 class If;
 class While;
 class VariableList;
+class Equal;
 
 class Visiteur{
 protected:
@@ -31,6 +32,7 @@ public:
 	virtual void visite(Affectation& a) = 0;
 	virtual void visite(If& i) = 0;
 	virtual void visite(While& w) = 0;
+	virtual void visite(Equal& c) = 0;
 };
 
 #endif /* __Visiteur_H__ */

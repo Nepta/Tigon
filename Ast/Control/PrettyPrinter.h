@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../Data/Operation/ReadVariable.h"
+#include "../Data/Operation/Boolean/Equal.h"
 #include "../Data/Int.h"
 #include "../Data/String.h"
 #include "../Data/Affectation.h"
@@ -86,6 +87,14 @@ public:
 		s_ << " do ";
 		w.expression()->accept(*this);
 		s_ << " end";
+	}
+
+	void visite(Equal& operation){
+		s_ << " (";
+		operation.left()->accept(*this);
+		s_ << " = ";
+		operation.right()->accept(*this);
+		s_ << ") ";
 	}
 
 	friend

@@ -109,6 +109,14 @@ public:
 		}
 	}
 	
+	void visite(Equal& operation){
+		operation.left()->accept(*this);
+		int left = pullVar();
+		operation.right()->accept(*this);
+		int right = pullVar();
+		pushVar(left==right);
+	}
+	
 	int peakVar(){
 		return var_;
 	}
