@@ -42,7 +42,7 @@ VariableList variableList_;
 %left "*" "/"
 %right "then" "else" //http://stackoverflow.com/questions/12731922/reforming-the-grammar-to-remove-shift-reduce-conflict-in-if-then-else/12734499#12734499
 %precedence "do"
-%nonassoc "="
+%nonassoc "=" "<>" "<" ">" "<=" ">="
 
 %token <int> INT "number"
 %token <std::string> STRING "string"
@@ -60,6 +60,11 @@ VariableList variableList_;
   STAR	"*"
   ASSIGN	":="
   EQUAL	"="
+  NOTEQUAL "<>"
+  LESS "<"
+  LESSEQUAL "<="
+  GREATER ">"
+  GREATEREQUAL ">="
   IF		"if"
   THEN	"then"
   ELSE	"else"
@@ -87,6 +92,11 @@ exp:
 | exp "*" exp							{ $$ = new Multiplication($1,$3); }
 | exp "/" exp							{ $$ = new Division($1,$3); }
 | exp "=" exp							{ $$ = new Equal($1,$3); }
+| exp "<>" exp							{ $$ = new NotEqual($1,$3); }
+| exp "<" exp							{ $$ = new Less($1,$3); }
+| exp "<=" exp							{ $$ = new LessEqual($1,$3); }
+| exp ">" exp							{ $$ = new Greater($1,$3); }
+| exp ">=" exp							{ $$ = new GreaterEqual($1,$3); }
 | "(" exp ")"							{ $$ = $2; }
 | "if" exp "then" exp "else" exp	{ $$ = new If($2,$4,$6); }
 | "if" exp "then" exp				{ $$ = new If($2,$4,new Int(0)); }

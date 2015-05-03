@@ -7,6 +7,12 @@
 
 #include "../Data/Operation/ReadVariable.h"
 #include "../Data/Operation/Boolean/Equal.h"
+#include "../Data/Operation/Boolean/NotEqual.h"
+#include "../Data/Operation/Boolean/Less.h"
+#include "../Data/Operation/Boolean/LessEqual.h"
+#include "../Data/Operation/Boolean/Greater.h"
+#include "../Data/Operation/Boolean/GreaterEqual.h"
+
 #include "../Data/Int.h"
 #include "../Data/String.h"
 #include "../Data/Affectation.h"
@@ -97,6 +103,46 @@ public:
 		s_ << ") ";
 	}
 
+	void visite(NotEqual& operation){
+		s_ << " (";
+		operation.left()->accept(*this);
+		s_ << " ≠ ";
+		operation.right()->accept(*this);
+		s_ << ") ";
+	}
+	
+	void visite(Less& operation){
+		s_ << " (";
+		operation.left()->accept(*this);
+		s_ << " < ";
+		operation.right()->accept(*this);
+		s_ << ") ";
+	}
+	
+	void visite(LessEqual& operation){
+		s_ << " (";
+		operation.left()->accept(*this);
+		s_ << " ≤ ";
+		operation.right()->accept(*this);
+		s_ << ") ";
+	}
+	
+	void visite(Greater& operation){
+		s_ << " (";
+		operation.left()->accept(*this);
+		s_ << " > ";
+		operation.right()->accept(*this);
+		s_ << ") ";
+	}
+	
+	void visite(GreaterEqual& operation){
+		s_ << " (";
+		operation.left()->accept(*this);
+		s_ << " ≥ ";
+		operation.right()->accept(*this);
+		s_ << ") ";
+	}
+	
 	friend
 	std::ostream& operator<<(std::ostream& ostr, PrettyPrinter& v);	
 };

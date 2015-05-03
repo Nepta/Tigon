@@ -114,7 +114,47 @@ public:
 		int left = pullVar();
 		operation.right()->accept(*this);
 		int right = pullVar();
-		pushVar(left==right);
+		pushVar(left = right);
+	}
+	
+	void visite(NotEqual& operation){
+		operation.left()->accept(*this);
+		int left = pullVar();
+		operation.right()->accept(*this);
+		int right = pullVar();
+		pushVar(left != right);
+	}
+	
+	void visite(Less& operation){
+		operation.left()->accept(*this);
+		int left = pullVar();
+		operation.right()->accept(*this);
+		int right = pullVar();
+		pushVar(left < right);
+	}
+	
+	void visite(LessEqual& operation){
+		operation.left()->accept(*this);
+		int left = pullVar();
+		operation.right()->accept(*this);
+		int right = pullVar();
+		pushVar(left <= right);
+	}
+	
+	void visite(Greater& operation){
+		operation.left()->accept(*this);
+		int left = pullVar();
+		operation.right()->accept(*this);
+		int right = pullVar();
+		pushVar(left > right);
+	}
+	
+	void visite(GreaterEqual& operation){
+		operation.left()->accept(*this);
+		int left = pullVar();
+		operation.right()->accept(*this);
+		int right = pullVar();
+		pushVar(left >= right);
 	}
 	
 	int peakVar(){

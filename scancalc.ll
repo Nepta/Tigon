@@ -24,6 +24,11 @@
 ")"							return yy::parser::token::TOK_RPAREN;
 ":="    						return yy::parser::token::TOK_ASSIGN;
 "="							return yy::parser::token::TOK_EQUAL;
+"<>"							return yy::parser::token::TOK_NOTEQUAL;
+"<"							return yy::parser::token::TOK_LESS;
+"<="							return yy::parser::token::TOK_LESSEQUAL;
+">"							return yy::parser::token::TOK_GREATER;
+">="							return yy::parser::token::TOK_GREATEREQUAL;
 \".*\"   					yylval->build<std::string>(yytext) ; return yy::parser::token::TOK_STRING;
 "if"							return yy::parser::token::TOK_IF;
 "then"						return yy::parser::token::TOK_THEN;
