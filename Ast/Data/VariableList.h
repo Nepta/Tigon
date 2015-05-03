@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include "../Control/Interpreter.h"
 
-class VariableList : Visitable{
+class VariableList{
 	std::unordered_map<std::string, Constante*> variableList_;
 
 public:
@@ -23,10 +23,6 @@ public:
 		int value = i.peakVar();
 		Constante* interpretedValue = new Int(value);
 		variableList_[name] = interpretedValue;
-	}
-	
-	void accept(Visiteur& v){
-		return v.visite(*this);
 	}
 };
 
