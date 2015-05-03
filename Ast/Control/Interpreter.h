@@ -110,11 +110,7 @@ public:
 
 inline
 std::ostream& operator<<(std::ostream& ostr, Interpreter& i){
-	try{
-		ostr << std::to_string(i.pullVar());
-	}catch(DivisionByZeroException& e){
-		ostr << std::string(e.what());
-	}
+	ostr << std::to_string(i.pullVar());
 	return ostr;
 }
 
