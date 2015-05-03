@@ -73,7 +73,7 @@ public:
 		pushVar(value);
 	}
 	
-	void visite(ReadVariable& v){
+	void visite(ReadVariable& v){//FIXME variable not found exception
 		std::string variableName = v.variableName();
 		Visitable* variable = variableList_.getValue(variableName);
 		pushVar(((Int*)variable)->value());

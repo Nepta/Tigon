@@ -3,11 +3,12 @@
 
 #include "Visitable.h"
 #include <unordered_map>
-#include "Int.h"
-#include <iostream>
+#include <vector>
 
 class VariableList{
-	std::unordered_map<std::string, Visitable*> variableList_;
+	using VarArray = std::unordered_map<std::string, Visitable*>;
+	using Scope = std::vector<VarArray>;
+	VarArray variableList_;
 
 public:
 	Visitable* getValue(std::string name){
@@ -15,10 +16,6 @@ public:
 	}
 	
 	void addValue(std::string name, Visitable *value){
-		int oldValue = 0;
-		try{
-			oldValue = ((Int*)variableList_.at(name))->value();
-		}catch(std::exception& e){}
 		variableList_[name] = value;
 	}
 };
