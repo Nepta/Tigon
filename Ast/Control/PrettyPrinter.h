@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 
+#include "../Data/Operation/ReadVariable.h"
 #include "../Data/Int.h"
 #include "../Data/String.h"
 #include "../Data/Affectation.h"
@@ -55,6 +56,10 @@ public:
 		s_ << variableName;
 		s_ << " := ";
 		a.expression()->accept(*this);
+	}
+	
+	void visite(ReadVariable& v){
+		s_<< v.variableName();
 	}
 	
 	void visite(Int& c){

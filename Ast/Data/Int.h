@@ -2,6 +2,7 @@
 #define __Int_H__
 
 #include "Constante.h"
+#include <iostream>
 
 class Int : public Constante{
 	int value_;

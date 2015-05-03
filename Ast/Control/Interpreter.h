@@ -13,6 +13,7 @@
 #include "DivisionByZeroException.h"
 #include <iostream>
 #include "../Data/VariableList.h"
+#include <typeinfo>
 
 class Interpreter : public Visiteur{
 	int var_;
@@ -57,7 +58,9 @@ public:
 	}
 
 	void visite(Subtraction& operation){
+		std::cerr << "\nmiaou : ";
 		operation.left()->accept(*this);
+		std::cerr << typeid(operation.left()).name() << std::endl;
 		int left = pullVar();
 		operation.right()->accept(*this);
 		int right = pullVar();
@@ -67,8 +70,15 @@ public:
 	void visite(Affectation& a){
 		a.expression()->accept(*this);
 		std::string variableName = a.variableName();
-		int value = peakVar();
+		int value = pullVar();
 		variableList_.addValue(variableName,new Int(value));
+		pushVar(value);
+	}
+	
+	void visite(ReadVariable& v){
+		std::string variableName = v.variableName();
+		Visitable* variable = variableList_.getValue(variableName);
+		pushVar(((Int*)variable)->value());
 	}
 	
 	void visite(Int& c){
@@ -76,7 +86,7 @@ public:
 	}
 	
 	void visite(String& s){
-		pushVar(9); //FIXME
+		pushVar(42); //FIXME
 	}
 	
 	void visite(If& i){
@@ -92,8 +102,18 @@ public:
 	void visite(While& w){
 		w.condition()->accept(*this);
 		int condition = pullVar();
-		if(condition != 0){
+		int watchDog = 17;
+		while(condition != 0 && watchDog != 0){
 			w.expression()->accept(*this);
+			pullVar();
+			w.condition()->accept(*this);
+			condition = pullVar();
+			watchDog--;
+			std::string pause;
+			std::cin >> pause;
+		}
+		if(watchDog == 0){
+			std::cerr << "ouaf" << std::endl;
 		}
 	}
 	

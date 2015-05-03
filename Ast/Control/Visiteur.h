@@ -7,6 +7,7 @@ class Addition;
 class Division;
 class Multiplication;
 class Subtraction;
+class ReadVariable;
 class Int;
 class String;
 class Affectation;
@@ -24,6 +25,7 @@ public:
 	virtual void visite(Division& operation) = 0;
 	virtual void visite(Multiplication& operation) = 0;
 	virtual void visite(Subtraction& operation) = 0;
+	virtual void visite(ReadVariable& v) = 0;
 	virtual void visite(Int& c) = 0;
 	virtual void visite(String& c) = 0;
 	virtual void visite(Affectation& a) = 0;

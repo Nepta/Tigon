@@ -24,6 +24,7 @@
 #include "Ast/Control/PrettyPrinter.h"
 #include "Ast/Control/Interpreter.h"
 #include "Ast/Data/VariableList.h"
+#include "Ast/Data/Operation/ReadVariable.h"
 extern VariableList variableList_;
 }
 
@@ -93,7 +94,7 @@ exp:
 | "var" "varname" ":=" "number"	{ Int *number = new Int($4); variableList_.addValue($2,number); $$ = number; }
 | "var" "varname" ":=" "string"	{ String *string = new String($4); variableList_.addValue($2,string); $$ = string; }
 | "varname" ":=" exp					{ $$ = new Affectation($1,$3); }
-| "varname"								{ $$ = variableList_.getValue($1); }
+| "varname"								{ $$ = new ReadVariable($1); }
 ;
 
 %%
