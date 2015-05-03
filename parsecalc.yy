@@ -105,11 +105,13 @@ void yy::parser::error(const location_type& loc, const std::string& msg){
 
 void interpreter(Visitable* v){
 	Interpreter i(variableList_);
+	v->accept(i);
 	std::cout << i << std::endl;
 }
 
 void prettyPrinter(Visitable* v){
 	PrettyPrinter p(variableList_);
+	v->accept(p);
 	std::cout << p << std::endl;
 }
 

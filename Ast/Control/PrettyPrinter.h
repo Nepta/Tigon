@@ -88,9 +88,7 @@ public:
 
 inline
 std::ostream& operator<<(std::ostream& ostr, PrettyPrinter& v){
-//	v.s_.str(std::string());
-//	v.ast_.accept(v);
-//	ostr << v.s_.str();
+	ostr << v.s_.str();
 	return ostr;
 }
 #endif /* __PrettyPrinter_H__ */
