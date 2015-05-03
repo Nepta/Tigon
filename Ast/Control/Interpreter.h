@@ -99,9 +99,7 @@ public:
 	}
 	
 	int peakVar(){
-//		ast_.accept(*this);
-//		return var_;
-		return 42;
+		return var_;
 	}
 	
 	friend
