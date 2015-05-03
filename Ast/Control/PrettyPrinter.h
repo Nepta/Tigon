@@ -60,13 +60,17 @@ public:
 	
 	void visite(Affectation& a){
 		std::string variableName = a.variableName();
+		s_ << " (";
 		s_ << variableName;
 		s_ << " := ";
 		a.expression()->accept(*this);
+		s_ << ") ";
 	}
 	
 	void visite(ReadVariable& v){
+		s_ << " {";
 		s_<< v.variableName();
+		s_ << "} ";
 	}
 	
 	void visite(Int& c){
@@ -139,6 +143,14 @@ public:
 		s_ << " (";
 		operation.left()->accept(*this);
 		s_ << " ≥ ";
+		operation.right()->accept(*this);
+		s_ << ") ";
+	}
+	
+	void visite(Sequence& operation){
+		s_ << " (";
+		operation.left()->accept(*this);
+		s_ << "; ";
 		operation.right()->accept(*this);
 		s_ << ") ";
 	}

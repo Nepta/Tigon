@@ -29,6 +29,7 @@
 "<="							return yy::parser::token::TOK_LESSEQUAL;
 ">"							return yy::parser::token::TOK_GREATER;
 ">="							return yy::parser::token::TOK_GREATEREQUAL;
+";"							return yy::parser::token::TOK_SEQUENCE;
 \".*\"   					yylval->build<std::string>(yytext) ; return yy::parser::token::TOK_STRING;
 "if"							return yy::parser::token::TOK_IF;
 "then"						return yy::parser::token::TOK_THEN;

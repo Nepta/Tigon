@@ -20,6 +20,7 @@ class Less;
 class LessEqual;
 class Greater;
 class GreaterEqual;
+class Sequence;
 
 class Visiteur{
 protected:
@@ -43,6 +44,7 @@ public:
 	virtual void visite(LessEqual& operation) = 0;
 	virtual void visite(Greater& operation) = 0;
 	virtual void visite(GreaterEqual& operation) = 0;
+	virtual void visite(Sequence& operation) = 0;
 };
 
 #endif /* __Visiteur_H__ */

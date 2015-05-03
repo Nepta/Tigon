@@ -21,6 +21,7 @@
 #include "Ast/Data/Operation/Subtraction.h"
 #include "Ast/Data/Operation/Multiplication.h"
 #include "Ast/Data/Operation/Division.h"
+#include "Ast/Data/Operation/Sequence.h"
 #include "Ast/Control/PrettyPrinter.h"
 #include "Ast/Control/Interpreter.h"
 #include "Ast/Data/VariableList.h"
@@ -37,11 +38,12 @@ VariableList variableList_;
 %}
 
 %expect 0
+%precedence "do"
+%left ";"
 %precedence ":="
 %left "+" "-"
 %left "*" "/"
 %right "then" "else" //http://stackoverflow.com/questions/12731922/reforming-the-grammar-to-remove-shift-reduce-conflict-in-if-then-else/12734499#12734499
-%precedence "do"
 %nonassoc "=" "<>" "<" ">" "<=" ">="
 
 %token <int> INT "number"
@@ -52,6 +54,7 @@ VariableList variableList_;
 %printer { yyo << $$; } <int>
 
 %token
+  SEQUENCE ";"
   LPAREN	"("
   MINUS	"-"
   PLUS	"+"
@@ -97,6 +100,7 @@ exp:
 | exp "<=" exp							{ $$ = new LessEqual($1,$3); }
 | exp ">" exp							{ $$ = new Greater($1,$3); }
 | exp ">=" exp							{ $$ = new GreaterEqual($1,$3); }
+| exp ";" exp							{ $$ = new Sequence($1,$3); }
 | "(" exp ")"							{ $$ = $2; }
 | "if" exp "then" exp "else" exp	{ $$ = new If($2,$4,$6); }
 | "if" exp "then" exp				{ $$ = new If($2,$4,new Int(0)); }
@@ -104,8 +108,6 @@ exp:
 | "(" error ")"						{ $$ = new Int(777); }
 | "number"								{ $$ = new Int($1); }
 | "string"								{ $$ = new String($1); }
-| "var" "varname" ":=" "number"	{ Int *number = new Int($4); variableList_.addValue($2,number); $$ = number; }
-| "var" "varname" ":=" "string"	{ String *string = new String($4); variableList_.addValue($2,string); $$ = string; }
 | "varname" ":=" exp					{ $$ = new Affectation($1,$3); }
 | "varname"								{ $$ = new ReadVariable($1); }
 ;

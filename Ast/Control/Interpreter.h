@@ -7,6 +7,7 @@
 #include "../Data/Operation/Subtraction.h"
 #include "../Data/Operation/Multiplication.h"
 #include "../Data/Operation/Division.h"
+#include "../Data/Operation/Sequence.h"
 #include "../Data/Affectation.h"
 #include "../Data/Block/If.h"
 #include "../Data/Block/While.h"
@@ -155,6 +156,11 @@ public:
 		operation.right()->accept(*this);
 		int right = pullVar();
 		pushVar(left >= right);
+	}
+	
+	void visite(Sequence& operation){
+		operation.left()->accept(*this);
+		operation.right()->accept(*this);
 	}
 	
 	int peakVar(){
