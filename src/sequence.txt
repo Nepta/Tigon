@@ -1,0 +1,4 @@
+cirno := 3+3
+if 1 then cirno := cirno + 1; cirno := cirno + 1; cirno := cirno + 1
+§cirno
+
