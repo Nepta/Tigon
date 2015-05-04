@@ -138,7 +138,7 @@ public:
 		int left = pullVar();
 		operation.right()->accept(*this);
 		int right = pullVar();
-		pushVar(left = right);
+		pushVar(left == right);
 	}
 	
 	void visite(NotEqual& operation){
