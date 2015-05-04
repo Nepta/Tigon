@@ -1,0 +1,8 @@
+cirno := 9
+if cirno > 9 then miaou := 42 else if cirno < 9 then chaton := 1337 else if cirno = 9 then nya := 2048
+
+§miaou
+§chaton
+§nya
+§cirno
+
