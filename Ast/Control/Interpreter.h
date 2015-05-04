@@ -109,6 +109,7 @@ public:
 	}
 	
 	void visite(If& i){
+		variableList_++;
 		i.condition()->accept(*this);
 		int condition = pullVar();
 		if(condition != 0){
@@ -116,6 +117,7 @@ public:
 		}else{
 			i.falseExpression()->accept(*this);
 		}
+		variableList_--;
 	}
 	
 	void visite(While& w){
