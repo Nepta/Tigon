@@ -22,7 +22,23 @@ public:
 	}
 	
 	void addValue(std::string name, Visitable *value){
+		for(auto variableList = scopedVariableList_.rbegin(); variableList != scopedVariableList_.rend(); variableList++){
+			if(variableList->count(name) > 0){
+				(*variableList)[name] = value;
+				return;
+			}
+		}
 		scopedVariableList_[scopeDeep][name] = value;
+	}
+	
+	void operator++(int){
+		scopeDeep++;
+		scopedVariableList_.push_back({std::unordered_map<std::string, Visitable*>()});
+	}
+	
+	void operator--(int){
+		scopeDeep--;
+		scopedVariableList_.pop_back();
 	}
 };
 

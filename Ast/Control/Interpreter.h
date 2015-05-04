@@ -103,6 +103,7 @@ public:
 	}
 	
 	void visite(While& w){
+		variableList_++;
 		w.condition()->accept(*this);
 		int condition = pullVar();
 		while(condition != 0){
@@ -113,6 +114,7 @@ public:
 			std::string pause;
 			std::cin >> pause;
 		}
+		variableList_--;
 	}
 	
 	void visite(Equal& operation){

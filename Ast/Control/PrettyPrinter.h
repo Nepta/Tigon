@@ -148,11 +148,11 @@ public:
 	}
 	
 	void visite(Sequence& operation){
-		s_ << " (";
+		s_ << "⟨";
 		operation.left()->accept(*this);
 		s_ << "; ";
 		operation.right()->accept(*this);
-		s_ << ") ";
+		s_ << "⟩";
 	}
 	
 	friend
