@@ -1,0 +1,3 @@
+cirno := 0
+while cirno <= 9 do §cirno;cirno := cirno + 1
+
