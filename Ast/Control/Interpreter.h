@@ -1,19 +1,23 @@
 #ifndef __Interpreter_H__
 #define __Interpreter_H__
 
-#include "../Data/Int.h"
-#include "../Data/String.h"
 #include "../Data/Operation/Addition.h"
 #include "../Data/Operation/Subtraction.h"
 #include "../Data/Operation/Multiplication.h"
 #include "../Data/Operation/Division.h"
 #include "../Data/Operation/Sequence.h"
+
+#include "../Data/Int.h"
+#include "../Data/String.h"
 #include "../Data/Affectation.h"
+#include "../Data/VariableList.h"
+#include "../Data/Print.h"
+
 #include "../Data/Block/If.h"
 #include "../Data/Block/While.h"
+
 #include "DivisionByZeroException.h"
 #include <iostream>
-#include "../Data/VariableList.h"
 
 class Interpreter : public Visiteur{
 	int var_;
@@ -81,6 +85,16 @@ public:
 			pushVar(variableAsInt->value());
 		}else{
 			pushVar(0); //FIXME?
+		}
+	}
+	
+	void visite(Print& p){
+		Visitable* variable = variableList_.getValue(p.variableName());
+		if(variable != nullptr){
+			Int* variableAsInt = dynamic_cast<Int*>(variable);
+			std::cerr << "{" << variableAsInt->value() << "}" << std::endl;
+		}else{
+			std::cerr << "{0}" << std::endl;
 		}
 	}
 	

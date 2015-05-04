@@ -26,6 +26,7 @@
 #include "Ast/Control/Interpreter.h"
 #include "Ast/Data/VariableList.h"
 #include "Ast/Data/Operation/ReadVariable.h"
+#include "Ast/Data/Print.h"
 extern VariableList variableList_;
 }
 
@@ -54,6 +55,7 @@ VariableList variableList_;
 %printer { yyo << $$; } <int>
 
 %token
+  PRINT	"§"
   SEQUENCE ";"
   LPAREN	"("
   MINUS	"-"
@@ -110,6 +112,7 @@ exp:
 | "string"								{ $$ = new String($1); }
 | "varname" ":=" exp					{ $$ = new Affectation($1,$3); }
 | "varname"								{ $$ = new ReadVariable($1); }
+| "§" "varname"						{ $$ = new Print($2);}
 ;
 
 %%

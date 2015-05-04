@@ -17,6 +17,8 @@
 #include "../Data/String.h"
 #include "../Data/Affectation.h"
 #include "../Data/VariableList.h"
+#include "../Data/Print.h"
+
 #include "../Data/Block/If.h"
 #include "../Data/Block/While.h"
 
@@ -68,9 +70,13 @@ public:
 	}
 	
 	void visite(ReadVariable& v){
-		s_ << " {";
 		s_<< v.variableName();
-		s_ << "} ";
+	}
+	
+	void visite(Print& p){
+		s_ << "{";
+		s_<< p.variableName();
+		s_ << "}";
 	}
 	
 	void visite(Int& c){

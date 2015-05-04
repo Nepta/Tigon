@@ -8,6 +8,7 @@ class Division;
 class Multiplication;
 class Subtraction;
 class ReadVariable;
+class Print;
 class Int;
 class String;
 class Affectation;
@@ -32,12 +33,7 @@ public:
 	virtual void visite(Division& operation) = 0;
 	virtual void visite(Multiplication& operation) = 0;
 	virtual void visite(Subtraction& operation) = 0;
-	virtual void visite(ReadVariable& v) = 0;
-	virtual void visite(Int& c) = 0;
-	virtual void visite(String& c) = 0;
-	virtual void visite(Affectation& a) = 0;
-	virtual void visite(If& i) = 0;
-	virtual void visite(While& w) = 0;
+
 	virtual void visite(Equal& operation) = 0;
 	virtual void visite(NotEqual& operation) = 0;
 	virtual void visite(Less& operation) = 0;
@@ -45,6 +41,15 @@ public:
 	virtual void visite(Greater& operation) = 0;
 	virtual void visite(GreaterEqual& operation) = 0;
 	virtual void visite(Sequence& operation) = 0;
+	
+	virtual void visite(Int& c) = 0;
+	virtual void visite(String& c) = 0;
+	virtual void visite(Affectation& a) = 0;
+	virtual void visite(ReadVariable& v) = 0;
+	virtual void visite(Print& expression) = 0;
+	
+	virtual void visite(If& i) = 0;
+	virtual void visite(While& w) = 0;
 };
 
 #endif /* __Visiteur_H__ */
