@@ -103,7 +103,9 @@ public:
 	}
 	
 	void visite(String& s){
-		pushVar(42); //FIXME
+		std::string stringValue = s.value();
+		std::hash<std::string> hashFunction;
+		pushVar(hashFunction(stringValue)); //FIXME
 	}
 	
 	void visite(If& i){
