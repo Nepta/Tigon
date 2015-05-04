@@ -1,0 +1,10 @@
+miaou := 1337
+miaou := if 1 then 42
+§miaou
+
+miaou := if 0 then 42
+§miaou
+
+if miaou = 0 then miaou := 9 else miaou := 69
+§miaou
+
