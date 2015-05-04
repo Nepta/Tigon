@@ -1,0 +1,4 @@
+n := 9
+prod := 1
+while n>1 do prod := prod*n; n := n-1
+§prod
